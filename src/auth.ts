@@ -5,7 +5,6 @@ import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import authConfig from '@/auth.config';
 import clientPromise from '@/db/client';
 import connectDB from './db/mongodb';
-import { users } from './db/schema';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: MongoDBAdapter(clientPromise),
