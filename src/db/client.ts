@@ -1,3 +1,5 @@
+export const runtime = 'nodejs';
+
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 const uri = process.env.NEXT_PUBLIC_MONGODB_URI!;
@@ -9,7 +11,7 @@ const options = {
   },
 };
 
-let client = new MongoClient(uri, options);
+const client = new MongoClient(uri, options);
 const clientPromise = client.connect();
 
 export default clientPromise;

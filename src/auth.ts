@@ -1,3 +1,5 @@
+export const runtime = 'nodejs';
+
 import NextAuth from 'next-auth';
 
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
@@ -5,6 +7,7 @@ import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import authConfig from '@/auth.config';
 import clientPromise from '@/db/client';
 import connectDB from './db/mongodb';
+import { users } from './db/schema';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: MongoDBAdapter(clientPromise),

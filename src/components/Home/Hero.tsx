@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from '@/assets/heroImage.svg';
 import Image from 'next/image';
-import Link from 'next/link';
 import Button from './button';
 
 const Hero = () => {

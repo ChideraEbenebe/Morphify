@@ -10,7 +10,6 @@ import { BiSolidLayerPlus } from 'react-icons/bi';
 import { PiSelectionBackgroundBold } from 'react-icons/pi';
 import { FaUser } from 'react-icons/fa';
 import ImageGridSkeleton from '../imageSkeleton/placeholder';
-import { IoMdDownload } from 'react-icons/io';
 
 interface GlobalImage {
   _id: string;

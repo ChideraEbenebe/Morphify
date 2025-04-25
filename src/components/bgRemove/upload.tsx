@@ -30,7 +30,7 @@ export default function ImageUpload() {
     [setOriginalImage]
   );
 
-  const onDropRejected = (fileRejections: any) => {
+  const onDropRejected = () => {
     alert('Only JPG, PNG, JPEG files under 5MB are allowed!');
   };
 
@@ -56,7 +56,7 @@ export default function ImageUpload() {
         )}>
         <input {...getInputProps()} />
         {preview ? (
-          <img
+          <Image
             src={preview}
             alt='Uploaded preview'
             className='w-full h-full object-cover rounded-xl'

@@ -1,5 +1,3 @@
-import connectDB from '@/db/mongodb';
-import { image, users } from '@/db/schema';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 

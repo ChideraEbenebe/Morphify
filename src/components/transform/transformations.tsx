@@ -4,7 +4,6 @@ import { useImageStore } from '@/lib/store/useFileStore';
 import { usePathname } from 'next/navigation';
 import React, { useEffect } from 'react';
 import Spinner from '../spinner/spinner';
-// import Spinner from '@/components/Spinner' // make sure you have this
 
 const Transformations = () => {
   const transformedImage = useImageStore((state) => state.transformedImage);
@@ -14,7 +13,7 @@ const Transformations = () => {
 
   useEffect(() => {
     reset();
-  }, [pathname]);
+  }, [pathname, reset]);
 
   return (
     <div className='flex flex-col items-center'>
@@ -26,7 +25,7 @@ const Transformations = () => {
         {loading ? (
           <Spinner />
         ) : transformedImage ? (
-          <img
+          <Image
             src={transformedImage}
             alt='Transformed'
             className='w-full h-full object-cover rounded-lg'

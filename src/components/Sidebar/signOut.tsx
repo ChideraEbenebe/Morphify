@@ -2,7 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 import React from 'react';
-import { BiExit, BiSolidExit } from 'react-icons/bi';
+import { BiSolidExit } from 'react-icons/bi';
 
 const SignOut = () => {
   return (

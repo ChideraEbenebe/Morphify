@@ -77,10 +77,16 @@ export async function POST(req: Request) {
       { message: 'Upload Successful', url: result },
       { status: 200 }
     );
-  } catch (error: any) {
-    console.error('Upload error:', error.message); // ✅ Log error message
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json(
+        { message: `Error: ${error.message}` },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
-      { message: 'Internal Server Error', error: error.message },
+      { message: 'Unknown server error occurred.' },
       { status: 500 }
     );
   }

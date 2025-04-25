@@ -1,13 +1,10 @@
 'use client';
 
-import { signIn } from '@/auth';
+import { signIn } from 'next-auth/react';
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { useSession } from 'next-auth/react';
 
 const Button = () => {
-  const { data: session } = useSession();
-
   return (
     <div>
       <button

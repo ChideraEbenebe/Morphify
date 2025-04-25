@@ -2,8 +2,7 @@
 
 import { useImageStore } from '@/lib/store/useFileStore';
 import { gen_fill } from '@/lib/utils';
-import { usePathname } from 'next/navigation';
-import React, { useState } from 'react';
+import React from 'react';
 
 const Button = ({ input, option }: { input: string; option: string }) => {
   const file = useImageStore((state) => state.originalImage);

@@ -2,7 +2,6 @@
 
 import { useImageStore } from '@/lib/store/useFileStore';
 import { objRecolor } from '@/lib/utils';
-import { usePathname } from 'next/navigation';
 import React from 'react';
 
 const Button = ({
