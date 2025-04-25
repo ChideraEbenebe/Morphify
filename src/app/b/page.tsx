@@ -62,11 +62,13 @@ export default async function Dashboard() {
           ))}
         </ul>
       </section>
-      <section className='mx-10 mt-10'>
+      <section className='mx-10 mt-12'>
         <h2 className='text-[32px] text-center'>
           Recent Edits On{' '}
           <span className='text-custom-orange font-semibold'>Morphify</span>
         </h2>
+
+        <hr className='py-6' />
 
         <GlobalImage />
       </section>
