@@ -5,6 +5,7 @@ import { useDropzone } from 'react-dropzone';
 import { Plus } from 'lucide-react';
 import { useImageStore } from '@/lib/store/useFileStore';
 import clsx from 'clsx';
+import Image from 'next/image';
 
 export default function ImageUpload() {
   const setOriginalImage = useImageStore((state) => state.setOriginalImage);

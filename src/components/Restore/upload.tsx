@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Plus } from 'lucide-react';
 import { useImageStore } from '@/lib/store/useFileStore';
+import Image from 'next/image';
 
 export default function ImageUpload() {
   const setOriginalImage = useImageStore((state) => state.setOriginalImage);

@@ -4,6 +4,7 @@ import { useImageStore } from '@/lib/store/useFileStore';
 import { usePathname } from 'next/navigation';
 import React, { useEffect } from 'react';
 import Spinner from '../spinner/spinner';
+import Image from 'next/image';
 
 const Transformations = () => {
   const transformedImage = useImageStore((state) => state.transformedImage);
