@@ -21,7 +21,7 @@ const Sidebar = () => {
       </button>
 
       {/* Desktop Sidebar */}
-      <aside className='w-[300px] p-6 fixed overflow-y-auto h-full shadow-lg hide-scrollbar hidden md:block'>
+      <aside className='w-[250px] md:w-[280px] p-6 fixed overflow-y-auto h-full shadow-lg hide-scrollbar hidden md:block'>
         <div className='pb-4'>
           <Image
             src={logo}
@@ -38,9 +38,9 @@ const Sidebar = () => {
       {/* Mobile Sidebar */}
       <aside
         className={clsx(
-          'w-[400px] p-6 fixed overflow-y-auto h-full shadow-lg hide-scrollbar bg-white transition-transform duration-300 ease-in-out z-40',
+          'w-[300px] md:w-[280px] p-6 fixed overflow-y-auto h-full shadow-lg hide-scrollbar bg-white transition-transform duration-300 ease-in-out z-40',
           isOpen ? 'translate-x-0' : '-translate-x-full',
-          'lg:hidden'
+          'md:hidden'
         )}>
         <div className='mt-24'>
           <Navlinks />
@@ -50,7 +50,7 @@ const Sidebar = () => {
       {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className='fixed inset-0 backdrop-blur-xs bg-opacity-50 z-30 lg:hidden'
+          className='fixed inset-0 backdrop-blur-xs bg-opacity-50 z-30 md:hidden'
           onClick={() => setIsOpen(false)}
         />
       )}

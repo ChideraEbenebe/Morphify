@@ -42,7 +42,7 @@ export default async function Dashboard() {
 
   return (
     <div className='mt-8 mb-8'>
-      <section className='bg-gradient-to-br text-white from-orange-300 to-custom-orange  mx-10 rounded-3xl shadow-2xl p-8 flex-col flex gap-4 justify-center '>
+      <section className='bg-gradient-to-br text-white from-orange-300 to-custom-orange  mx-10 rounded-3xl shadow-2xl p-8 flex-col md:flex gap-4 justify-center hidden '>
         <div className='w-full flex justify-center items-center text-center'>
           <h1 className='text-[44px] font-semibold  max-w-[550px]'>
             Unleash Your Creative Vision With Morphify

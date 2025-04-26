@@ -3,11 +3,9 @@ import React from 'react';
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='flex'>
-      <div className='w-[400px]'>
-        <Sidebar />
-      </div>
-      <div className='w-full'>{children}</div>
+    <div className='flex min-h-screen'>
+      <Sidebar />
+      <main className='flex-1 ml-[100px] md:ml-[280px]'>{children}</main>
     </div>
   );
 };
