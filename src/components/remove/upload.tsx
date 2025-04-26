@@ -60,6 +60,8 @@ export default function ImageUpload() {
           <Image
             src={preview}
             alt='Uploaded preview'
+            width={40}
+            height={40}
             className='w-full h-full object-cover rounded-xl'
           />
         ) : (

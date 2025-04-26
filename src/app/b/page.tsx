@@ -63,7 +63,7 @@ export default async function Dashboard() {
         </ul>
       </section>
       <section className='mx-10 mt-12'>
-        <h2 className='text-[32px] text-center'>
+        <h2 className='text-[32px] text-center mb-4'>
           Recent Edits On{' '}
           <span className='text-custom-orange font-semibold'>Morphify</span>
         </h2>

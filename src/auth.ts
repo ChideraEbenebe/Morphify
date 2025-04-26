@@ -1,5 +1,3 @@
-export const runtime = 'nodejs';
-
 import NextAuth from 'next-auth';
 
 import { MongoDBAdapter } from '@auth/mongodb-adapter';

@@ -61,7 +61,7 @@ const InputForm = () => {
           </Select>
         </div>
 
-        <div className='grid grid-cols-2 gap-4 mt-8'>
+        <div className='grid md:grid-cols-2 gap-4 mt-8'>
           <ImageUpload />
           <Transformations />
         </div>

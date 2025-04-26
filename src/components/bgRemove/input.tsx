@@ -26,7 +26,7 @@ const InputForm = () => {
           placeholder='puppy in a shirt'
           className='placeholder:text-slate-300 placeholder:text-md h-14 text-md rounded-2xl border-[1px] border-slate-300 focus-visible:ring-0 focus:border-input'
         />
-        <div className='grid grid-cols-2 gap-4 mt-8'>
+        <div className='grid md:grid-cols-2  gap-4 mt-8'>
           <ImageUpload />
           <Transformations />
         </div>

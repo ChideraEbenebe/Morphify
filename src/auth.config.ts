@@ -1,5 +1,3 @@
-export const runtime = 'nodejs';
-
 import Google from 'next-auth/providers/google';
 import type { NextAuthConfig } from 'next-auth';
 // import connectDB from './db/mongodb';
