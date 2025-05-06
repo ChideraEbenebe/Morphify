@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 import React, { FC } from 'react';
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 type Image = {
