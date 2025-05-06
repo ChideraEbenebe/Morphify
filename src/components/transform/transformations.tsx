@@ -4,7 +4,7 @@ import { useImageStore } from '@/lib/store/useFileStore';
 import { usePathname } from 'next/navigation';
 import React, { useEffect } from 'react';
 import Spinner from '../spinner/spinner';
-import Image from 'next/image';
+import Image from 'next/image'; // Import the Image component
 
 const Transformations = () => {
   const transformedImage = useImageStore((state) => state.transformedImage);
@@ -22,19 +22,25 @@ const Transformations = () => {
         Transformation
       </h2>
 
-      <div className='w-96 h-72 flex items-center justify-center shadow-inner shadow-accent-foreground bg-gray-50 rounded-xl transition-all'>
-        {loading ? (
-          <Spinner />
-        ) : transformedImage ? (
+      {transformedImage ? (
+        <div className='w-full max-w-[500px] h-full aspect-square relative rounded-xl overflow-hidden'>
           <Image
             src={transformedImage}
-            alt='Transformed'
-            className='w-full h-full object-cover rounded-lg'
+            alt='Transformed image'
+            fill
+            style={{ objectFit: 'contain' }} // Or 'cover', depending on desired behavior
+            className='rounded-lg'
           />
-        ) : (
-          <p className='text-gray-500'>Transformed Image</p>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className='w-96 h-72 flex items-center justify-center shadow-inner shadow-accent-foreground bg-gray-50 rounded-xl transition-all'>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <p className='text-gray-500'>Transformed Image</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,8 +1,8 @@
 'use client';
 
 import { useImageStore } from '@/lib/store/useFileStore';
-import { gen_fill } from '@/lib/utils';
 import React from 'react';
+import { showEventCreatedToast, showEventErrorToast } from '../toast';
 
 const Button = ({ input, option }: { input: string; option: string }) => {
   const file = useImageStore((state) => state.originalImage);
@@ -16,12 +16,12 @@ const Button = ({ input, option }: { input: string; option: string }) => {
 
   async function applyTransformation() {
     try {
-      console.log(option);
       setLoading(true);
 
       const formData = new FormData();
       formData.append('file', file);
       formData.append('title', input);
+      formData.append('aspect', option);
 
       const response = await fetch('/api/fill/upload', {
         method: 'POST',
@@ -29,7 +29,6 @@ const Button = ({ input, option }: { input: string; option: string }) => {
       });
 
       const data = await response.json();
-      console.log('API Response:', data); // ✅ Log the API response
 
       if (!response.ok) {
         alert(`Upload failed: ${data.message}`);
@@ -37,13 +36,16 @@ const Button = ({ input, option }: { input: string; option: string }) => {
         setImageFormat('');
         return;
       }
-
-      const transformedUrl = await gen_fill(data.url.secure_url, option);
-
-      setTransformedImage(transformedUrl);
-      setImageFormat(data.url.format);
+      showEventCreatedToast();
+      setTransformedImage(data.url);
+      const urlParts = data.url.split('.');
+      const format = urlParts[urlParts.length - 1];
+      setImageFormat(format);
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        showEventErrorToast(error.message);
+      }
+      showEventErrorToast('An Unexpected error occurred');
       setLoading(false);
     } finally {
       setLoading(false);

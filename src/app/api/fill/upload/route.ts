@@ -3,6 +3,7 @@ import cloudinary from 'cloudinary';
 import connectDB from '@/db/mongodb';
 import { auth } from '@/auth';
 import { imageModel, users } from '@/db/schema';
+import { gen_fill } from '@/lib/utils';
 
 cloudinary.v2.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -21,6 +22,7 @@ export async function POST(req: Request) {
     const formData = await req.formData();
     const file = formData.get('file') as File;
     const title = formData.get('title') as string;
+    const option = formData.get('aspect') as string;
 
     if (!file) {
       return NextResponse.json(
@@ -37,15 +39,17 @@ export async function POST(req: Request) {
       folder: 'uploads',
     });
 
-    await connectDB().catch((e) => {
-      console.log(e);
-    });
+    await connectDB();
+
+    const transformedUrl = await gen_fill(result.secure_url, option);
 
     const storedImage = new imageModel({
-      imageUrl: result.secure_url,
+      imageUrl: transformedUrl,
+      original: result.secure_url,
       uploadedBy: session.user?.name,
       uploadedByEmail: session.user?.email,
       edit: 'fill',
+      prompt: `Aspect Ratio ${option}`,
       title,
       name: session.user?.name,
     });
@@ -57,7 +61,8 @@ export async function POST(req: Request) {
           image: {
             id: result.public_id,
             title: title || '',
-            url: result.secure_url,
+
+            url: transformedUrl,
             uploadedAt: new Date(),
             edit: 'fill',
           },
@@ -69,7 +74,7 @@ export async function POST(req: Request) {
     await storedImage.save();
 
     return NextResponse.json(
-      { message: 'Upload Successful', url: result },
+      { message: 'Upload Successful', url: transformedUrl, result },
       { status: 200 }
     );
   } catch (error) {

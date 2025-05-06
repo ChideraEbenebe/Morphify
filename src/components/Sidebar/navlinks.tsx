@@ -59,7 +59,6 @@ const navLinks = [
 
 const Navlinks = () => {
   const pathname = usePathname();
-
   const mainLinks = navLinks.slice(0, -1);
   const profileLink = navLinks[navLinks.length - 1];
 

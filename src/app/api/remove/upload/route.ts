@@ -39,14 +39,14 @@ export async function POST(req: Request) {
       folder: 'uploads',
     });
 
+    await connectDB();
+
     const transformedUrl = await objRemove(result.secure_url, object);
 
-    await connectDB().catch((e) => {
-      console.log(e);
-    });
-
     const storedImage = new imageModel({
-      imageUrl: result.secure_url,
+      imageUrl: transformedUrl,
+      original: result.secure_url,
+      prompt: object,
       uploadedBy: session.user?.name,
       uploadedByEmail: session.user?.email,
       edit: 'remove',
@@ -61,7 +61,8 @@ export async function POST(req: Request) {
           image: {
             id: result.public_id,
             title: title || '',
-            url: result.secure_url,
+            original: result.secure_url,
+            url: transformedUrl,
             uploadedAt: new Date(),
             edit: 'remove',
           },

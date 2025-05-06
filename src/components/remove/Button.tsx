@@ -3,6 +3,7 @@
 import { useImageStore } from '@/lib/store/useFileStore';
 // import { objRemove } from '@/lib/utils';
 import React from 'react';
+import { showEventCreatedToast, showEventErrorToast } from '../toast';
 
 const Button = ({ input }: { input: { object: string; title: string } }) => {
   const file = useImageStore((state) => state.originalImage);
@@ -40,9 +41,16 @@ const Button = ({ input }: { input: { object: string; title: string } }) => {
         return;
       }
 
+      showEventCreatedToast();
       setTransformedImage(data.url);
-      setImageFormat(data.result.format);
+      const urlParts = data.url.split('.');
+      const format = urlParts[urlParts.length - 1];
+      setImageFormat(format);
     } catch (error) {
+      if (error instanceof Error) {
+        showEventErrorToast(error.message);
+      }
+      showEventErrorToast('An Unexpected error occurred');
       setLoading(false);
     } finally {
       setLoading(false);

@@ -27,21 +27,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return true;
     },
-    // async session({ session, token }) {
-    //   if (token && session.user && token.sub) {
-    //     session.user.id = token.sub;
-    //   }
-    //   return session;
-    // },
-    // async jwt({ token }) {
-    //   return token;
-    // },
-    // async redirect({ url, baseUrl }) {
-    //   // If the url is within our own site
-    //   if (url.startsWith(baseUrl)) return url;
-    //   // Otherwise, fallback
-    //   return baseUrl + '/b';
-    // },
   },
   secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
 });

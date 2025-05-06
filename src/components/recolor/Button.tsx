@@ -1,8 +1,8 @@
 'use client';
 
 import { useImageStore } from '@/lib/store/useFileStore';
-import { objRecolor } from '@/lib/utils';
 import React from 'react';
+import { showEventCreatedToast, showEventErrorToast } from '../toast';
 
 const Button = ({
   input,
@@ -25,8 +25,10 @@ const Button = ({
       const formData = new FormData();
       formData.append('file', file);
       formData.append('title', input.title);
+      formData.append('object', input.object);
+      formData.append('newColor', input.newColor);
 
-      const response = await fetch('/api/remove/upload', {
+      const response = await fetch('/api/recolor/upload', {
         method: 'POST',
         body: formData,
       });
@@ -41,16 +43,16 @@ const Button = ({
 
         return;
       }
-
-      const transformedUrl = await objRecolor(
-        data.url.secure_url,
-        input.object,
-        input.newColor
-      );
-
-      setTransformedImage(transformedUrl);
-      setImageFormat(data.url.format);
+      showEventCreatedToast();
+      setTransformedImage(data.url);
+      const urlParts = data.url.split('.');
+      const format = urlParts[urlParts.length - 1];
+      setImageFormat(format);
     } catch (error) {
+      if (error instanceof Error) {
+        showEventErrorToast(error.message);
+      }
+      showEventErrorToast('An Unexpected error occurred');
       setLoading(true);
     } finally {
       setLoading(false);

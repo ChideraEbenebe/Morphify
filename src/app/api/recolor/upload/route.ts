@@ -3,6 +3,7 @@ import cloudinary from 'cloudinary';
 import connectDB from '@/db/mongodb';
 import { auth } from '@/auth';
 import { imageModel, users } from '@/db/schema';
+import { objRecolor } from '@/lib/utils';
 
 cloudinary.v2.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -21,6 +22,8 @@ export async function POST(req: Request) {
     const formData = await req.formData();
     const file = formData.get('file') as File;
     const title = formData.get('title') as string;
+    const object = formData.get('object') as string;
+    const newColor = formData.get('newColor') as string;
 
     if (!file) {
       return NextResponse.json(
@@ -37,12 +40,18 @@ export async function POST(req: Request) {
       folder: 'uploads',
     });
 
-    await connectDB().catch((e) => {
-      console.log(e);
-    });
+    await connectDB();
+
+    const transformedImage = await objRecolor(
+      result.secure_url,
+      object,
+      newColor
+    );
 
     const storedImage = new imageModel({
-      imageUrl: result.secure_url,
+      imageUrl: transformedImage,
+      original: result.secure_url,
+      prompt: `${object} to ${newColor}`,
       uploadedBy: session.user?.name,
       uploadedByEmail: session.user?.email,
       edit: 'recolor',
@@ -57,7 +66,8 @@ export async function POST(req: Request) {
           image: {
             id: result.public_id,
             title: title || '',
-            url: result.secure_url,
+            original: result.secure_url,
+            url: transformedImage,
             uploadedAt: new Date(),
             edit: 'recolor',
           },
@@ -69,7 +79,7 @@ export async function POST(req: Request) {
     await storedImage.save();
 
     return NextResponse.json(
-      { message: 'Upload Successful', url: result },
+      { message: 'Upload Successful', url: transformedImage, result },
       { status: 200 }
     );
   } catch (error) {

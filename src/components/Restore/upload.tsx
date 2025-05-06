@@ -48,7 +48,7 @@ export default function ImageUpload() {
       <h2 className='text-2xl font-bold text-custom-orange'>Original</h2>
       <div
         {...getRootProps()}
-        className='mt-4 w-96 h-72 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 bg-gray-50 rounded-xl shadow-md cursor-pointer hover:border-custom-orange transition-all overflow-hidden'>
+        className='mt-4 w-full h-full flex flex-col items-center justify-center border-2 border-dashed border-gray-300 bg-gray-50 rounded-xl shadow-md cursor-pointer hover:border-custom-orange transition-all overflow-hidden'>
         <input {...getInputProps()} />
         {preview ? (
           <Image

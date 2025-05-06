@@ -10,7 +10,7 @@ const homeLinks = [
 
 const Navbar = () => {
   return (
-    <nav className='sticky top-0 w-full p-6 backdrop-blur-xs'>
+    <nav className='sticky top-0 w-full p-6 backdrop-blur-lg'>
       <div className='flex items-center justify-between gap-4 max-w-[1150px] mx-auto'>
         <div className='font-bold text-slate-800 text-3xl font-sans'>
           <Link href={'/'}>Morphify</Link>

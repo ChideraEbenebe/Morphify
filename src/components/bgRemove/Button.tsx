@@ -2,6 +2,7 @@
 
 import { useImageStore } from '@/lib/store/useFileStore';
 import React from 'react';
+import { showEventCreatedToast, showEventErrorToast } from '../toast';
 
 const Button = ({ title }: { title: string }) => {
   const file = useImageStore((state) => state.originalImage);
@@ -20,13 +21,12 @@ const Button = ({ title }: { title: string }) => {
       formData.append('file', file);
       formData.append('title', title);
 
-      const response = await fetch('/api/remove/upload', {
+      const response = await fetch('/api/bgremove/upload', {
         method: 'POST',
         body: formData,
       });
 
       const data = await response.json();
-      console.log('API Response:', data); // ✅ Log the API response
 
       if (!response.ok) {
         alert(`Upload failed: ${data.message}`);
@@ -36,12 +36,16 @@ const Button = ({ title }: { title: string }) => {
         return;
       }
 
-      setTransformedImage(
-        `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/e_background_removal/${data.url.public_id}.jpg`
-      );
-      setImageFormat(data.url.format);
+      setTransformedImage(data.url);
+      showEventCreatedToast();
+      const urlParts = data.url.split('.');
+      const format = urlParts[urlParts.length - 1];
+      setImageFormat(format);
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        showEventErrorToast(error.message);
+      }
+      showEventErrorToast('An Unexpected error occurred');
       setLoading(false);
     } finally {
       setLoading(false);

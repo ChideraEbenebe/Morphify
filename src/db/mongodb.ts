@@ -7,7 +7,6 @@ const connectDB = async () => {
     await mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI!, {
       dbName: 'Morphify',
     });
-    console.log('✅ MongoDB connected');
   } catch (error) {
     console.error('❌ MongoDB connection error:', error);
   }

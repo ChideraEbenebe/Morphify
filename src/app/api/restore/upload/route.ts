@@ -43,13 +43,11 @@ export async function POST(req: Request) {
       ],
     });
 
-    await connectDB().catch((e) => {
-      console.log(e);
-    });
-
+    await connectDB();
     const storedImage = new imageModel({
       imageUrl: result.secure_url,
       title,
+      original: result.secure_url,
       uploadedBy: session.user?.name,
       uploadedByEmail: session.user?.email,
       edit: 'restore',

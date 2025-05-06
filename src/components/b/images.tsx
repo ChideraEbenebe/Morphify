@@ -10,6 +10,7 @@ import { BiSolidLayerPlus } from 'react-icons/bi';
 import { PiSelectionBackgroundBold } from 'react-icons/pi';
 import { FaUser } from 'react-icons/fa';
 import ImageGridSkeleton from '../imageSkeleton/placeholder';
+import Link from 'next/link';
 
 interface GlobalImage {
   _id: string;
@@ -18,16 +19,6 @@ interface GlobalImage {
   edit: string;
   title: string;
 }
-
-const iconMap: { [key: string]: React.ReactNode } = {
-  restore: <BsFileImage size={20} />,
-  fill: <BsStars size={20} />,
-  remove: <AiOutlineScan size={20} />,
-  recolor: <BiSolidLayerPlus size={20} />,
-  bgremove: <PiSelectionBackgroundBold size={20} />,
-  profile: <FaUser size={20} />,
-  home: <GoHomeFill size={20} />,
-};
 
 const GlobalImage = () => {
   const itemsPerPage = 6;
@@ -71,7 +62,7 @@ const GlobalImage = () => {
           {globalImage.length === 0 ? (
             <div className='col-span-full flex flex-col items-center justify-center text-center p-10'>
               <Image
-                src={notfound} // ⬅️ Replace with your actual image path
+                src={notfound}
                 alt='No images'
                 width={200}
                 height={200}
@@ -83,23 +74,43 @@ const GlobalImage = () => {
             </div>
           ) : (
             currentItems.map((img) => (
-              <div
+              <Link
                 key={img._id}
-                className='card w-full max-w-md bg-base-100 shadow-lg rounded-2xl'>
-                <figure className='relative h-[300px] w-full'>
-                  <Image
-                    src={img.imageUrl}
-                    alt={img.title || 'User Image'}
-                    fill
-                    className='object-cover rounded-t-2xl'
-                  />
-                </figure>
+                href={`/b/transformation/${img._id}`}>
+                <div className='card w-full max-w-md bg-base-100 shadow-lg rounded-2xl'>
+                  <figure className='relative h-[300px] w-full'>
+                    <Image
+                      src={img.imageUrl}
+                      alt={img.title || 'User Image'}
+                      fill
+                      className='object-cover rounded-t-2xl'
+                    />
+                  </figure>
 
-                <div className='p-5 flex justify-between items-center text-base'>
-                  <p className='font-medium'>{img.title || 'Untitled'}</p>
-                  <p>{iconMap[img.edit] || <BsFileImage size={24} />}</p>
+                  <div className='p-5 flex justify-between items-center text-base text-gray-600 bg-gray-100'>
+                    <p className='font-medium'>{img.title || 'Untitled'}</p>
+                    <p>
+                      {img.edit === 'restore' ? (
+                        <BsFileImage size={20} />
+                      ) : img.edit === 'fill' ? (
+                        <BsStars size={20} />
+                      ) : img.edit === 'remove' ? (
+                        <AiOutlineScan size={20} />
+                      ) : img.edit === 'recolor' ? (
+                        <BiSolidLayerPlus size={20} />
+                      ) : img.edit === 'bgRemove' ? (
+                        <PiSelectionBackgroundBold size={20} />
+                      ) : img.edit === 'profile' ? (
+                        <FaUser size={20} />
+                      ) : img.edit === 'home' ? (
+                        <GoHomeFill size={20} />
+                      ) : (
+                        <BsFileImage size={20} />
+                      )}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))
           )}
         </div>

@@ -23,12 +23,15 @@ const ImageSchema = new mongoose.Schema({
     required: true,
   },
   title: { type: String, required: true },
+  original: { type: String, required: true },
+  prompt: { type: String, required: false },
   name: {
     type: String,
     required: true,
   },
   edit: {
     type: String,
+
     required: true,
   },
   uploadedBy: {

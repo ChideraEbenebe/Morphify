@@ -2,6 +2,7 @@
 
 import { useImageStore } from '@/lib/store/useFileStore';
 import React from 'react';
+import { showEventCreatedToast, showEventErrorToast } from '../toast';
 
 const Button = ({ input }: { input: string }) => {
   const file = useImageStore((state) => state.originalImage);
@@ -35,10 +36,14 @@ const Button = ({ input }: { input: string }) => {
         return;
       }
 
+      showEventCreatedToast();
       setTransformedImage(data.url.secure_url);
       setImageFormat(data.url.format);
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        showEventErrorToast(error.message);
+      }
+      showEventErrorToast('An Unexpected error occurred');
       setLoading(false);
     } finally {
       setLoading(false);

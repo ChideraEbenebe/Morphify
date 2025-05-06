@@ -114,7 +114,7 @@ const UserImage = () => {
                   />
                 </figure>
 
-                <div className='p-5 flex justify-between items-center text-base'>
+                <div className='p-5 flex justify-between items-center text-base bg-gray-100 text-gray-600'>
                   <p className='font-medium'>{img.title || 'Untitled'}</p>
                   <p>{iconMap[img.edit] || <BsFileImage size={24} />}</p>
                 </div>
