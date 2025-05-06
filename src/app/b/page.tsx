@@ -9,25 +9,25 @@ import { BsFileImage, BsStars } from 'react-icons/bs';
 const navLinks = [
   {
     id: 2,
-    href: '/transformation/add/restore',
+    href: '/b/transformation/add/restore',
     icon: <BsFileImage size={24} />,
     text: 'Restore Image',
   },
   {
     id: 3,
-    href: '/transformation/add/fill',
+    href: '/b/transformation/add/fill',
     icon: <BsStars size={24} />,
     text: 'Generative Fill',
   },
   {
     id: 4,
-    href: '/transformation/add/remove',
+    href: '/b/transformation/add/remove',
     icon: <AiOutlineScan size={24} />,
     text: 'Object Remove',
   },
   {
     id: 5,
-    href: '/transformation/add/recolor',
+    href: '/b/transformation/add/recolor',
     icon: <BiSolidLayerPlus size={24} />,
     text: 'Object Recolor',
   },
