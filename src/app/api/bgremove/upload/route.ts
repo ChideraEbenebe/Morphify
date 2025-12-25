@@ -1,5 +1,3 @@
-'use server';
-
 import { NextResponse } from 'next/server';
 import cloudinary from 'cloudinary';
 import connectDB from '@/db/mongodb';
