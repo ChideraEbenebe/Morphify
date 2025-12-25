@@ -1,3 +1,5 @@
+'use server';
+
 import connectDB from '@/db/mongodb';
 import { imageModel } from '@/db/schema';
 

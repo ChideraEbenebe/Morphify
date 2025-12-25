@@ -1,3 +1,4 @@
+'use server';
 import { auth } from '@/auth';
 import connectDB from '@/db/mongodb';
 import { users } from '@/db/schema';
